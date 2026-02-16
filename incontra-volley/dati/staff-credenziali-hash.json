@@ -1,0 +1,34 @@
+{
+  "utenti": [
+    {
+      "username": "presidente",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "ruolo": "presidente",
+      "categorie": ["tutte"]
+    },
+    {
+      "username": "dirigente",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "ruolo": "dirigente",
+      "categorie": ["tutte"]
+    },
+    {
+      "username": "allenatore_under17",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "ruolo": "allenatore",
+      "categorie": ["under17"]
+    },
+    {
+      "username": "allenatore_under15",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "ruolo": "allenatore",
+      "categorie": ["under15"]
+    },
+    {
+      "username": "allenatore_prima",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "ruolo": "allenatore",
+      "categorie": ["prima-squadra"]
+    }
+  ]
+}
