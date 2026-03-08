@@ -524,7 +524,7 @@ p {
     .container { padding: 0 24px; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .glass-nav { padding: 0.5rem 1rem; }
     .nav-links {
         display: none;
@@ -632,7 +632,7 @@ p {
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 480px) {
     .glass-nav { padding: 0.25rem 0.5rem; }
     .logo-placeholder { width: 38px; height: 38px; }
     .nav-logo { width: 118px; height: 38px; }
@@ -749,22 +749,6 @@ p {
 details[open] .details-arrow {
     transform: rotate(180deg);
     opacity: 0.8;
-}
-
-/* ── CLASSIFICHE RESPONSIVE ──────────────────────────────────── */
-@media (max-width: 560px) {
-    .classifica-table {
-        font-size: 0.75rem;
-    }
-    .classifica-table td,
-    .classifica-table th {
-        padding: 4px 5px;
-        white-space: normal;
-        word-break: break-word;
-    }
-    .classifica-table td:first-child {
-        width: 22px;
-    }
 }
 
 /* Tendina classifiche – summary allineato su mobile */
