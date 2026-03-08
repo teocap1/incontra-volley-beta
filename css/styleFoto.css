@@ -617,12 +617,11 @@ p {
     /* Details summary – stack verticale su schermi piccoli */
     details summary {
         flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
+        align-items: left !important;
     }
 
     details summary > div:last-child {
-        align-items: center !important;
+        align-items: left !important;
     }
 
     /* Sponsor grid – 2 colonne */
@@ -830,3 +829,4 @@ details[open] .details-arrow {
     0%, 100% { background: rgba(255, 10, 46, 0.08); }
     50%       { background: rgba(255, 10, 46, 0.16); }
 }
+
