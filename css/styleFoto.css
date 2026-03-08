@@ -559,12 +559,7 @@ p {
         grid-template-columns: 1fr !important;
     }
 
-    /* Classifiche – 1 colonna */
-    .classifica-table td,
-    .classifica-table th {
-        padding: 5px 6px;
-        font-size: 0.78rem;
-    }
+    
 
     /* Staff grid – 1 colonna */
     .staff-grid {
@@ -582,15 +577,12 @@ p {
     }
 
     /* Flex rows (sedi, classifiche, contatti, risultati) – colonna singola */
-    [style*="display: flex"][style*="flex-wrap: wrap"] {
-        flex-direction: column;
-    }
-
-    /* Classifiche flex items – larghezza piena */
     [style*="flex: 0 1 calc(33.333%"] {
         flex: 1 1 100% !important;
         min-width: 0 !important;
+        width: 100% !important;
     }
+
 }
 
 @media (max-width: 480px) {
@@ -621,23 +613,16 @@ p {
         gap: 6px !important;
     }
 
-    /* Tabella classifica – testo più piccolo */
-    .classifica-table td,
-    .classifica-table th {
-        padding: 4px 5px;
-        font-size: 0.72rem;
-        white-space: normal;
-    }
 
     /* Details summary – stack verticale su schermi piccoli */
     details summary {
         flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 4px !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     details summary > div:last-child {
-        align-self: flex-end;
+        align-items: center !important;
     }
 
     /* Sponsor grid – 2 colonne */
@@ -698,30 +683,6 @@ p {
     body::before { background: rgba(0,0,0,0.75); }
 }
 
-/* ================================================================
-   UTILITY
-   ================================================================ */
-.gallery-hidden {
-    display: none;
-}
-
-/* ── TENDINA CLASSIFICHE ─────────────────────────────────────── */
-details summary::-webkit-details-marker { display: none; }
-
-details summary span:last-child {
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    display: inline-block;
-}
-
-details[open] table {
-    animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
 /* ── TABELLA CLASSIFICA ──────────────────────────────────────── */
 .classifica-table {
     width: 100%;
@@ -736,8 +697,6 @@ details[open] table {
 }
 
 .classifica-table th {
-    padding: 6px 8px;
-    text-align: left;
     font-family: 'Barlow Condensed', sans-serif;
     font-style: italic;
     font-weight: 700;
@@ -749,14 +708,13 @@ details[open] table {
 
 .classifica-table th:last-child,
 .classifica-table td:last-child {
-    text-align: right;
+    text-align: center;
 }
 
 .classifica-table td {
     padding: 6px 8px;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-lightest);
-    white-space: nowrap;
 }
 
 .classifica-table td:first-child {
@@ -767,7 +725,7 @@ details[open] table {
 
 .classifica-table tr.my-team td {
     color: var(--text-primary);
-    font-weight: 700;
+    font-weight: 800;
     background: rgba(255, 10, 46, 0.08);
 }
 
@@ -783,7 +741,6 @@ details[open] table {
 .details-arrow {
     font-size: 0.7rem;
     opacity: 0.5;
-    margin-left: 10px;
     flex-shrink: 0;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-block;
@@ -808,4 +765,84 @@ details[open] .details-arrow {
     .classifica-table td:first-child {
         width: 22px;
     }
+}
+
+/* Tendina classifiche – summary allineato su mobile */
+details summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* ── ANIMAZIONE TENDINA CLASSIFICHE ─────────────────────────── */
+details > table {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+        max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity    0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        transform  0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
+}
+
+details[open] > table {
+    max-height: 600px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Righe della tabella – entrano in sequenza */
+details[open] tbody tr {
+    animation: rowIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+details[open] tbody tr:nth-child(1)  { animation-delay: 0.05s; }
+details[open] tbody tr:nth-child(2)  { animation-delay: 0.010s; }
+details[open] tbody tr:nth-child(3)  { animation-delay: 0.15s; }
+details[open] tbody tr:nth-child(4)  { animation-delay: 0.20s; }
+details[open] tbody tr:nth-child(5)  { animation-delay: 0.25s; }
+details[open] tbody tr:nth-child(6)  { animation-delay: 0.30s; }
+details[open] tbody tr:nth-child(7)  { animation-delay: 0.35s; }
+details[open] tbody tr:nth-child(8)  { animation-delay: 0.40s; }
+details[open] tbody tr:nth-child(9)  { animation-delay: 0.45s; }
+details[open] tbody tr:nth-child(10) { animation-delay: 0.50s; }
+
+@keyframes rowIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Freccia – rotazione fluida */
+.details-arrow {
+    font-size: 0.7rem;
+    opacity: 0.5;
+    flex-shrink: 0;
+    transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity   0.3s ease;
+    display: inline-block;
+}
+
+details[open] .details-arrow {
+    transform: rotate(180deg);
+    opacity: 0.9;
+}
+
+/* Riga my-team – piccolo glow pulsante */
+.classifica-table tr.my-team td {
+    animation: myTeamGlow 3s ease-in-out infinite;
+}
+
+@keyframes myTeamGlow {
+    0%, 100% { background: rgba(255, 10, 46, 0.08); }
+    50%       { background: rgba(255, 10, 46, 0.16); }
 }
