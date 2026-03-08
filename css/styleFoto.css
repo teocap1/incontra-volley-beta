@@ -553,6 +553,44 @@ p {
     .grid-3 { grid-template-columns: 1fr !important; gap: 14px; }
     h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } h3 { font-size: 1.25rem; }
     body { background-attachment: scroll; }
+
+    /* Calendario eventi – 1 colonna */
+    .event-list {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Classifiche – 1 colonna */
+    .classifica-table td,
+    .classifica-table th {
+        padding: 5px 6px;
+        font-size: 0.78rem;
+    }
+
+    /* Staff grid – 1 colonna */
+    .staff-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Atleti grid – 2 colonne */
+    .athlete-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Galleria – 2 colonne */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Flex rows (sedi, classifiche, contatti, risultati) – colonna singola */
+    [style*="display: flex"][style*="flex-wrap: wrap"] {
+        flex-direction: column;
+    }
+
+    /* Classifiche flex items – larghezza piena */
+    [style*="flex: 0 1 calc(33.333%"] {
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -565,6 +603,48 @@ p {
     .container { padding: 0 14px; margin: 16px auto; }
     .glass-card, .glass-card-sponsor { padding: 1rem; margin-bottom: 1rem; }
     .glass-footer { margin: 28px 10px 14px; padding: 1rem; }
+
+    /* Calendario eventi – 1 colonna stretta */
+    .event-list {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Atleti – 1 colonna */
+    .athlete-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Galleria – 2 colonne strette */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+
+    /* Tabella classifica – testo più piccolo */
+    .classifica-table td,
+    .classifica-table th {
+        padding: 4px 5px;
+        font-size: 0.72rem;
+        white-space: normal;
+    }
+
+    /* Details summary – stack verticale su schermi piccoli */
+    details summary {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+
+    details summary > div:last-child {
+        align-self: flex-end;
+    }
+
+    /* Sponsor grid – 2 colonne */
+    .glass-card-sponsor {
+        min-height: 80px !important;
+        padding: 14px !important;
+    }
 }
 
 @media (max-width: 375px) {
@@ -578,6 +658,23 @@ p {
     .glass-footer { margin: 20px 8px 10px; padding: 0.75rem; }
     .footer-info p { font-size: 0.7rem; }
     .social-icon img { width: 34px; height: 34px; }
+
+    /* Galleria – 1 colonna su schermi minuscoli */
+    .gallery-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Atleti – 1 colonna */
+    .athlete-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 900px) {
+    /* Calendario – 2 colonne su tablet */
+    .event-list {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 }
 
 @media (max-height: 600px) and (orientation: landscape) {
@@ -601,25 +698,23 @@ p {
     body::before { background: rgba(0,0,0,0.75); }
 }
 
+/* ================================================================
+   UTILITY
+   ================================================================ */
 .gallery-hidden {
     display: none;
 }
 
-/* Classifiche – tendina */
+/* ── TENDINA CLASSIFICHE ─────────────────────────────────────── */
 details summary::-webkit-details-marker { display: none; }
 
-details[open] summary span:last-child {
-    transform: rotate(180deg);
-    display: inline-block;
-}
-
 details summary span:last-child {
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-block;
 }
 
-details[open] > div {
-    animation: slideDown 1s cubic-bezier(0.16, 1, 0.3, 1);
+details[open] table {
+    animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideDown {
@@ -627,7 +722,7 @@ details[open] > div {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── TABELLA CLASSIFICA ───────────────────────────────────────── */
+/* ── TABELLA CLASSIFICA ──────────────────────────────────────── */
 .classifica-table {
     width: 100%;
     border-collapse: collapse;
@@ -670,7 +765,6 @@ details[open] > div {
     width: 28px;
 }
 
-/* Riga della nostra squadra evidenziata */
 .classifica-table tr.my-team td {
     color: var(--text-primary);
     font-weight: 700;
@@ -685,7 +779,7 @@ details[open] > div {
     background: rgba(255, 255, 255, 0.04);
 }
 
-/* Freccia tendina */
+/* ── FRECCIA TENDINA ─────────────────────────────────────────── */
 .details-arrow {
     font-size: 0.7rem;
     opacity: 0.5;
@@ -700,118 +794,18 @@ details[open] .details-arrow {
     opacity: 0.8;
 }
 
-details[open] table {
-    animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-
-}
-
-/* ================================================================
-   RESPONSIVE – CLASSIFICHE, GALLERIA, CALENDARIO, ATLETI, STAFF
-   ================================================================ */
-
-/* Classifiche – griglia flex */
-@media (max-width: 900px) {
-    [style*="flex: 0 1 calc(33.333%"] {
-        flex: 0 1 calc(50% - 12px) !important;
-    }
-}
-
+/* ── CLASSIFICHE RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 560px) {
-    [style*="flex: 0 1 calc(33.333%"] {
-        flex: 0 1 100% !important;
-    }
-}
-
-/* Calendario eventi – griglia 3 colonne */
-@media (max-width: 900px) {
-    .event-list {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
-@media (max-width: 560px) {
-    .event-list {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-/* Galleria – griglia 3 colonne */
-@media (max-width: 600px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
-@media (max-width: 380px) {
-    .gallery-grid {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-/* Atleti – griglia card */
-@media (max-width: 600px) {
-    .athlete-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .athlete-grid {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-/* Staff – griglia card */
-@media (max-width: 600px) {
-    .staff-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 16px !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .staff-grid {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-/* Sponsor – griglia */
-@media (max-width: 600px) {
-    .glass-card-sponsor img {
-        max-height: 60px !important;
-    }
-}
-
-/* Tabella classifiche – scroll orizzontale su mobile */
-@media (max-width: 480px) {
-    details[open] {
-        overflow-x: auto;
-    }
-
     .classifica-table {
-        font-size: 0.78rem;
+        font-size: 0.75rem;
     }
-
     .classifica-table td,
     .classifica-table th {
-        padding: 5px 6px;
+        padding: 4px 5px;
+        white-space: normal;
+        word-break: break-word;
     }
-}
-
-/* Summary classifiche – testo non va a capo su mobile */
-@media (max-width: 480px) {
-    details summary {
-        flex-wrap: nowrap;
-    }
-
-    details summary strong {
-        font-size: 0.82rem;
-    }
-}
-
-/* Risultati e sedi – flex wrap anticipato */
-@media (max-width: 560px) {
-    [style*="display: flex"][style*="flex-wrap: wrap"] > [style*="flex: 1"] {
-        flex: 0 1 100% !important;
+    .classifica-table td:first-child {
+        width: 22px;
     }
 }
