@@ -545,6 +545,7 @@ window.Views = {
                             </table>
                         </details>
                     </div>
+
                 </div>
             </div>
             
@@ -1534,13 +1535,17 @@ document.addEventListener('click', function(e) {
 
     if (e.target && e.target.id === 'show-more-btn') {
         const hiddenImages = document.querySelectorAll('.gallery-hidden');
-        hiddenImages.forEach(img => {
+        if (!hiddenImages.length) return;
+        hiddenImages.forEach((img, i) => {
             img.classList.remove('gallery-hidden');
-            img.classList.add('gallery-hidden-now'); // ← segna quali erano nascoste
+            img.classList.add('gallery-hidden-now');
+            // animazione a cascata
+            img.style.animationDelay = (i * 0.04) + 's';
+            img.classList.add('gallery-item-in');
         });
         e.target.style.display = 'none';
-        document.getElementById('show-less-btn').style.display = ''; // ← mostra il bottone
-
+        const lessBtn = document.getElementById('show-less-btn');
+        if (lessBtn) lessBtn.style.display = '';
         if (typeof GLightbox !== 'undefined') {
             GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true,
                 zoomable: true, draggable: true, download: true,
@@ -1549,11 +1554,17 @@ document.addEventListener('click', function(e) {
     }
 
     if (e.target && e.target.id === 'show-less-btn') {
-        const hiddenImages = document.querySelectorAll('.gallery-hidden-now');
-        hiddenImages.forEach(img => img.classList.add('gallery-hidden'));
-        hiddenImages.forEach(img => img.classList.remove('gallery-hidden-now'));
+        const shownImages = document.querySelectorAll('.gallery-hidden-now');
+        if (!shownImages.length) return;
+        shownImages.forEach(img => {
+            img.classList.add('gallery-hidden');
+            img.classList.remove('gallery-hidden-now');
+            img.classList.remove('gallery-item-in');
+            img.style.animationDelay = '';
+        });
         e.target.style.display = 'none';
-        document.getElementById('show-more-btn').style.display = '';
+        const moreBtn = document.getElementById('show-more-btn');
+        if (moreBtn) moreBtn.style.display = '';
     }
 });
 
@@ -1595,6 +1606,5 @@ function eseguiLogin() {
         messageDiv.textContent = 'Credenziali errate';
     }
 }
-
 
 console.log('✅ Components.js caricato con tutte le viste');
