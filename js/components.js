@@ -225,8 +225,6 @@ window.Views = {
                         </details>
                     </div>
 
-                    <br>
-
                     <div style="flex: 0 1 calc(33.333% - 16px); min-width: 160px;">
                         <h5 style="border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 10px;">
                             Under 18
@@ -286,8 +284,6 @@ window.Views = {
                             </table>
                         </details>
                     </div>
-
-                    <br>
 
                     <div style="flex: 0 1 calc(33.333% - 16px); min-width: 160px;">
                         <h5 style="border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 10px;">
@@ -361,8 +357,6 @@ window.Views = {
                         </details>
                     </div>
 
-                    <br>
-
                     <div style="flex: 0 1 calc(33.333% - 16px); min-width: 160px;">
                         <h5 style="border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 10px;">
                             Seconda Divisione Blu
@@ -431,8 +425,6 @@ window.Views = {
                         </details>
                     </div>
 
-                    <br>
-
                     <div style="flex: 0 1 calc(33.333% - 16px); min-width: 160px;">
                         <h5 style="border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 10px;">
                             Under 16 White
@@ -494,8 +486,6 @@ window.Views = {
                         </details>
                     </div>
 
-                    <br>
-
                     <div style="flex: 0 1 calc(33.333% - 16px); min-width: 160px;">
                         <h5 style="border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 10px;">
                             Under 16 Blu
@@ -555,12 +545,6 @@ window.Views = {
                             </table>
                         </details>
                     </div>
-
-                    <br>
-
-                    <div style="flex: 0 1 calc(33.333% - 16px); min-width: 160px;">
-                    </div>
-
                 </div>
             </div>
             
@@ -1611,5 +1595,6 @@ function eseguiLogin() {
         messageDiv.textContent = 'Credenziali errate';
     }
 }
+
 
 console.log('✅ Components.js caricato con tutte le viste');
